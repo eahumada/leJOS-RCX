@@ -10,6 +10,8 @@ public class Object
     return this == aOther;
   }
 
+  private native static int getDataAddress (Object obj);
+
   public int hashCode()
   {
     return getDataAddress (this);
@@ -50,11 +52,11 @@ public class Object
   public final native void wait(long timeout) throws InterruptedException;
   
   /**
-   * Returns the empty string. It's here to satisfy javac.
+   * Returns constant string. It's here to satisfy javac.
    */
   public String toString()
   {
-    return "";
+    return "<Object>";
   }
 
   /**
@@ -64,8 +66,6 @@ public class Object
   {
     return null;
   }
-
-  private native static int getDataAddress (Object obj);
 }
 
 

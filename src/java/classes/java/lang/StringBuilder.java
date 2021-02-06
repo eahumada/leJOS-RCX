@@ -9,7 +9,7 @@ package java.lang;
  * @author <a href="mailto:martin@egholm-nielsen.dk">Martin E. Nielsen</a>
  * @author Sven Köhler
  */
-public final class StringBuffer implements CharSequence
+public class StringBuilder implements CharSequence
 {
 	private static final int INITIAL_CAPACITY = 10;
 	private static final int CAPACITY_INCREMENT_NUM = 3;	//numerator of the increment factor
@@ -41,12 +41,12 @@ public final class StringBuffer implements CharSequence
 		}
 	}
 
-  public StringBuffer ()
+  public StringBuilder ()
   {
     characters = new char[INITIAL_CAPACITY];
   }
   
-  public StringBuffer (CharSequence seq)
+  public StringBuilder (CharSequence seq)
   {
 	  int len = seq.length();
 	  curLen = len;
@@ -55,7 +55,7 @@ public final class StringBuffer implements CharSequence
 		  characters[i] = seq.charAt(i);
   }
 
-  public StringBuffer (int length)
+  public StringBuilder (int length)
   {
     if (length < 0)
     	throw new NegativeArraySizeException("length is negative");
@@ -63,13 +63,13 @@ public final class StringBuffer implements CharSequence
     characters = new char[length];
   }
 
-  public StringBuffer (String aString)
+  public StringBuilder (String aString)
   {
     characters = aString.toCharArray();
     curLen = characters.length;
   }
 
-  public synchronized StringBuffer delete(int start, int end)
+  public StringBuilder delete(int start, int end)
   {
 	  if (start < 0 || start > curLen)
 		  throw new StringIndexOutOfBoundsException(start);
@@ -84,27 +84,27 @@ public final class StringBuffer implements CharSequence
       return this;
   }
 
-  public StringBuffer deleteCharAt(int index)
+  public StringBuilder deleteCharAt(int index)
   {
       return this.delete(index, index+1);
   }
 
-  public StringBuffer append (String s)
+  public StringBuilder append (String s)
   {
 	  return this.appendInternal(s);
   }
 
-  public StringBuffer append (Object aObject)
+  public StringBuilder append (Object aObject)
   {
 	  return this.appendInternal(String.valueOf(aObject));
   }
 
-  public StringBuffer append (boolean aBoolean)
+  public StringBuilder append (boolean aBoolean)
   {
     return this.appendInternal(String.valueOf(aBoolean));
   }
   
-  public synchronized StringBuffer append (char aChar)
+  public StringBuilder append (char aChar)
   {
 	  int newLen = curLen +1;
 	  ensureCapacity(newLen);
@@ -115,12 +115,12 @@ public final class StringBuffer implements CharSequence
 	  return this;
   }
 
-	public StringBuffer append(char[] c)
+	public StringBuilder append(char[] c)
 	{
 		return this.append(c, 0, c.length);
 	}
 	
-	public synchronized StringBuffer append(char[] c, int off, int len)
+	public StringBuilder append(char[] c, int off, int len)
 	{
 		int newLen = curLen + len;
 		ensureCapacity(newLen);
@@ -132,12 +132,12 @@ public final class StringBuffer implements CharSequence
 		return this;
 	}
 
-	public StringBuffer append(CharSequence cs)
+	public StringBuilder append(CharSequence cs)
 	{
 		return this.append(cs, 0, cs.length());
 	}
 	
-	public synchronized StringBuffer append(StringBuffer sb)
+	public StringBuilder append(StringBuffer sb)
 	{
 		int len = sb.length();
 		this.ensureCapacity(curLen + len);
@@ -145,7 +145,7 @@ public final class StringBuffer implements CharSequence
 		return this;
 	}
 	
-	public synchronized StringBuffer append(CharSequence cs, int start, int end)
+	public StringBuilder append(CharSequence cs, int start, int end)
 	{
 		int len = end - start;
 		int newLen = curLen + len;
@@ -158,7 +158,7 @@ public final class StringBuffer implements CharSequence
 		return this;
 	}
 
-  public synchronized StringBuffer append (int i)
+  public StringBuilder append (int i)
   {
 	  int intLen = StringUtils.exactStringLength(i, 10);
 	  int newLen = curLen + intLen;
@@ -170,14 +170,14 @@ public final class StringBuffer implements CharSequence
 	  return this;
   }
 
-	public synchronized StringBuffer append (float aFloat)
+	public StringBuilder append (float aFloat)
 	{
 		ensureCapacity(curLen + StringUtils.MAX_FLOAT_CHARS);
 		curLen = StringUtils.getFloatChars(aFloat, characters, curLen);
     	return this;
 	}
 	
-	public synchronized StringBuffer appendCodePoint(int cp)
+	public StringBuilder appendCodePoint(int cp)
 	{
 		ensureCapacity(curLen + 2);
 		curLen += Character.toChars(cp, characters, curLen);
@@ -187,7 +187,7 @@ public final class StringBuffer implements CharSequence
   /**
    * Appends a string with no null checking
    */
-  private StringBuffer appendInternal(String s) {
+  private StringBuilder appendInternal(String s) {
 	  if (s == null)
 		  s = "null";
 	  
@@ -212,28 +212,28 @@ public final class StringBuffer implements CharSequence
       return indexOf(str, 0);
   }
 
-  public synchronized int indexOf(String str, int fromIndex) {
+  public int indexOf(String str, int fromIndex) {
       return String.indexOf(characters, 0, curLen,
                             str.characters, 0, str.characters.length, fromIndex);
   }
 
-  public synchronized int lastIndexOf(String str) {
+  public int lastIndexOf(String str) {
       // Note, synchronization achieved via other invocations
       return lastIndexOf(str, curLen);
   }
 
-  public synchronized int lastIndexOf(String str, int fromIndex) {
+  public int lastIndexOf(String str, int fromIndex) {
       return String.lastIndexOf(characters, 0, curLen,
                             str.characters, 0, str.characters.length, fromIndex);
   }
   
   @Override
-  public synchronized String toString()
+  public String toString()
   {
     return new String (characters, 0, curLen);
   }
 
-  public synchronized char charAt(int i)
+  public char charAt(int i)
   {
 	  if (i < 0 || i >= curLen)
 		  throw new StringIndexOutOfBoundsException(i);
@@ -241,7 +241,7 @@ public final class StringBuffer implements CharSequence
         return characters[i];
   }
   
-  public synchronized void setCharAt(int i, char ch)
+  public void setCharAt(int i, char ch)
   {
 	  if (i < 0 || i >= curLen)
 		  throw new StringIndexOutOfBoundsException(i);
@@ -249,7 +249,7 @@ public final class StringBuffer implements CharSequence
         characters[i] = ch;
   }
   
-  public synchronized void setLength(int newLen)
+  public void setLength(int newLen)
   {
 	  if (newLen < 0)
 		  throw new IndexOutOfBoundsException();
@@ -260,7 +260,7 @@ public final class StringBuffer implements CharSequence
 	  curLen = newLen;
   }
   
-  public synchronized int length()
+  public int length()
   {
         return curLen;
   }
@@ -268,7 +268,7 @@ public final class StringBuffer implements CharSequence
   /**
    * Retrieves the contents of the StringBuilder in the form of an array of characters.
    */
-  public synchronized void getChars(int start, int end, char[] dst, int dstStart)
+  public void getChars(int start, int end, char[] dst, int dstStart)
   {
 	  if (end > curLen)
 		  throw new StringIndexOutOfBoundsException(end);
@@ -278,8 +278,8 @@ public final class StringBuffer implements CharSequence
   public String substring(int start) {
       return substring(start, curLen);
   }
-  
-  public synchronized String substring(int start, int end) {
+
+  public String substring(int start, int end) {
 	  if (start < 0 || start > curLen)
 		  throw new StringIndexOutOfBoundsException(start);
 	  if (end > curLen)
@@ -290,7 +290,7 @@ public final class StringBuffer implements CharSequence
 	  int len = end - start;
 	  return new String(characters, start, len);
   }
-
+  
   public CharSequence subSequence(int start, int end)
   {
 	  return substring(start, end);
