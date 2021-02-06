@@ -46,7 +46,7 @@ public final class ConsolePrintStream extends PrintStream {
 	 * 
 	 * @param s The string to print.
 	 */
-	@Override
+	// @Override
 	protected void write(String s) {
 		synchronized (out) {
 			putStringToStdout0(s);
@@ -60,7 +60,7 @@ public final class ConsolePrintStream extends PrintStream {
 	 * @param s The string to print.
 	 * 
 	 */
-	@Override
+	// @Override
 	protected void writeln(String s) {
 		synchronized (out) {
 			putStringToStdout0(s);
