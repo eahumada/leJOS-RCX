@@ -1,0 +1,3 @@
+ lejosjc Iterate.java
+ java -cp /home/eahumada/Projects/GitHub/eahumada/leJOS-RCX/3rdparty/lib/bcel-5.1.jar:/home/eahumada/Projects/GitHub/eahumada/leJOS-RCX/3rdparty/lib/commons-cli-1.0.jar:/home/eahumada/Projects/GitHub/eahumada/leJOS-RCX/lib/jtools.jar:/home/eahumada/Projects/GitHub/eahumada/leJOS-RCX/lib/classes.jar:/home/eahumada/Projects/GitHub/eahumada/leJOS-RCX/lib/rcxcomm.jar -Dtinyvm.linker=emu-lejos -Dtinyvm.loader=emu-lejosrun -Dtinyvm.loader=emu-lejosrun -Dtinyvm.home=../../../bin/.. js.tinyvm.TinyVM -cp .:/home/eahumada/Projects/GitHub/eahumada/leJOS-RCX/lib/classes.jar -wo LE Iterate -o Iterate.emu
+ emu-lejosrun Iterate.emu

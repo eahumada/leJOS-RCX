@@ -172,12 +172,13 @@ int main (int argc, char *argv[])
     toolName = TOOL_NAME;
   
   newargv[count++] = toolName;
-
+  newargv[count++] = "-cp";
+  newargv[count++] = getenv("LEJOSCP");
   newargv[count++] = "-Dtinyvm.linker=" LINKER_TOOL;
   newargv[count++] = "-Dtinyvm.loader=" LOADER_TOOL;
   newargv[count++] = "-Dtinyvm.loader=" LOADER_TOOL;
   newargv[count++] = append ("-Dtinyvm.home=", tinyvmHome); 
-  newargv[count++] = CLASS_NAME;  
+  newargv[count++] = CLASS_NAME;
   newargv[count++] = "-cp";
   /*newargv[count++] = get_loader_classpath (libPath,libCommPath);*/
   newargv[count++] = getenv("CLASSPATH");

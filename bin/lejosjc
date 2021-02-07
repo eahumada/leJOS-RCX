@@ -15,5 +15,9 @@ else
   SEP=":"
 fi
 
+echo "LEJOS_HOME:($LEJOS_HOME)"
+
+echo "$LEJOS_HOME/lib/classes.jar$SEP$LEJOS_HOME/lib/rcxcomm.jar$SEP${CLASSPATH:-.}" "$@"
+
 javac -bootclasspath "$LEJOS_HOME/lib/classes.jar$SEP$LEJOS_HOME/lib/rcxcomm.jar$SEP${CLASSPATH:-.}" "$@"
 

@@ -4,7 +4,7 @@ package java.lang;
  * Just some utility methods for the wrapper classes as well as StringBuffer and StringBuilder.
  * @author Sven Köhler
  */
-class StringUtils
+public class StringUtils
 {
 	private static final int STR_NAN_LEN = 3;
 	private static final String STR_NAN = "NaN";
@@ -426,5 +426,8 @@ class StringUtils
 		
 		return neg ? -r2 : r2;
 	}
-	
+
+	public static char [] getCharacters(String s) {
+		return s.characters;
+	}	
 }

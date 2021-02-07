@@ -17,8 +17,8 @@
   				outfile="${make.out}/emu-lejos"
   				objdir="." 
   				outtype="executable" 
-  				debug="false"
-  			    exceptions="false"
+  				debug="true"
+  			    exceptions="true"
   			    rtti="true"
   			    optimize="speed"
   				name="${lejos.compiler}">

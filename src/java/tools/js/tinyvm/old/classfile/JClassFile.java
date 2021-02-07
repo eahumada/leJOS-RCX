@@ -41,8 +41,8 @@ public class JClassFile implements IDumpable, IConstants
    public static final int ACC_INTERFACE = 0x0200;
    public static final int ACC_ABSTRACT = 0x0400;
 
-   public static final int kMinorVersion = 3;
-   public static final int kMajorVersion = 45;
+   public static final int kMinorVersion = 0;
+   public static final int kMajorVersion = 52;
 
    public JClassFile ()
    {

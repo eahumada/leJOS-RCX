@@ -349,6 +349,28 @@ void dispatch_native (TWOBYTES signature, STACKWORD *paramBase)
       printf("> Get region address - 0x%X\n", (int)region);
       push_word ((int)region);
       return;
+    case floatToRawIntBits_4F_5I:
+		/* Fall through */
+    case putCharToStdout0_4I_5V:
+	putc((int)paramBase[0], stdout);
+	return;
+    case getCharFromStdin0_4_5I:
+		push_word(getc(stdin));
+		return;
+    case putStringToStdout0_4Ljava_3lang_3String_2_5V:
+	{
+		String* s = (String*)word2obj(paramBase[0]);
+		if ((s != NULL) && (s->characters)) {
+			Object *obj = word2obj(get_word((byte*)(&(s->characters)), 4));
+			JCHAR *pA = jchar_array(obj);
+			int length = get_array_length(obj);
+			int i = 0;
+			for (; i < length; ++i) {
+				putc((int)pA[i], stdout);
+			}
+		}
+	}
+	return;
     default:
 #ifdef DEBUG_METHODS
       printf("Received bad native method code: %d\n", signature);
